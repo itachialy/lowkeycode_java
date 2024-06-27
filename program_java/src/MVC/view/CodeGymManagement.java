@@ -12,6 +12,7 @@ public class CodeGymManagement {
 
         chooseMainFunction();
         chooseStudentFunction();
+        chooseTeacherFunction();
     }
     public static void chooseMainFunction(){
         Scanner sc = new Scanner(System.in);
@@ -52,7 +53,7 @@ public class CodeGymManagement {
                     studentController.displayStudent();
                     break;
                 case 2:
-                    System.out.println("Them moi sinh vien.");
+                    studentController.addStudent();
                     break;
                 case 3:
                     System.out.println("Chinh sua sinh vien.");
