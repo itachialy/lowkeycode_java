@@ -23,4 +23,41 @@ public class StudenRepoImpl implements IStudentRepo {
     public void save(Student student) {
         students.add(student);
     }
+
+
+    @Override
+    public boolean removeStudent(int id) {
+        for(Student student : students){
+            if (student.getId() == id){
+                students.remove(student);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateStudent(int id,String code,  String name, LocalDate birthday, String email, String className) {
+        for (Student student : students) {
+            if (student.getId() == id) {
+                student.setBirthday(birthday);
+                student.setName(name);
+                student.setBirthday(birthday);
+                student.setEmail(email);
+                student.setClassName(className);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isExistingStudent(int id) {
+        for (Student student : students){
+            if (student.getId() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

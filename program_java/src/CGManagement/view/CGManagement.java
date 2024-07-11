@@ -53,43 +53,14 @@ public class CGManagement {
                     studentController.addNewStudent();
                     break;
                 case 3:
-                    System.out.println("Chinh sua sinh vien.");
+                    studentController.updateStudent();
                     break;
                 case 4:
-                    System.out.println("Xoa sinh vien.");
+                    studentController.removeStudent();
                     break;
                 case 5:
                     return;
             }
         } while (true);
     }
-
-//    public static void chooseTeacherFunction() {
-//        Scanner sc = new Scanner(System.in);
-//        TeacherController teacherController = new TeacherController();
-//        do {
-//            System.out.println("Lựa chọn chức năng: \n" +
-//                    "1.Hien thi danh sach \n" +
-//                    "2.Them moi giang vien. \n" +
-//                    "3.Chinh sua giang vien. \n" +
-//                    "4.Xoa giang vien. \n" +
-//                    "5.Quay ve Menu chính.");
-//            int choice = Integer.parseInt(sc.nextLine());
-//            switch (choice) {
-//                case 1:
-//                    teacherController.displayTeacher();
-//                    break;
-//                case 2:
-//                    System.out.println("Them moi giang vien.");
-//                    break;
-//                case 3:
-//                    System.out.println("Chinh sua giang vien.");
-//                    break;
-//                case 4:
-//                    System.out.println("Xoa giang vien.");
-//                    break;
-//                case 5:
-//                    return;
-//            }
-//        } while (true);
-    }
+}
