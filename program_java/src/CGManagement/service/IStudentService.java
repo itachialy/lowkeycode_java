@@ -12,4 +12,5 @@ public interface IStudentService {
     boolean removeStudent(int id);
     boolean updateStudent(int id, String code, String name, LocalDate birthday, String email, String className);
     boolean isExistingStudent(int id);
+    List<Student> getStudentsByName(String name);
 }

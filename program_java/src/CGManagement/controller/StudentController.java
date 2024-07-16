@@ -4,9 +4,10 @@ import CGManagement.model.Student;
 import CGManagement.service.IStudentService;
 import CGManagement.service.StudentServiceImpl;
 
+import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class StudentController {
@@ -76,6 +77,106 @@ public class StudentController {
             System.out.println("Cập nhật thành công.");
         } else {
             System.out.println("Không thành công");
+        }
+    }
+
+    public void getStudentByName() {
+        String name;
+        do {
+            System.out.print("Nhập tên sinh viên cần tìm kiếm: ");
+            name = sc.nextLine();
+            if (name.isEmpty()) {
+                System.out.println("Bạn chưa nhập tên để tìm kiếm!");
+            } else {
+                List<Student> studentList = iStudentService.getStudentsByName(name);
+                if (studentList.isEmpty()) {
+                    System.out.println("Không tìm thấy sinh viên nào có tên chứa \"" + name + "\".");
+                } else {
+                    for (Student student : studentList) {
+                        System.out.println(student);
+                    }
+                }
+            }
+        } while (name.isEmpty());
+    }
+
+    public void exportToCSV() {
+        try(
+                FileWriter fileWriter = new FileWriter("src/CGManagement/view/students.csv", false);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)
+                ) {
+            try {
+                bufferedWriter.write("Class\tID\tCode\tName\tBirthday\tEmail\n");
+                List<Student> students = iStudentService.findAll();
+                for( Student student : students){
+                    bufferedWriter.write(
+                            student.getClassName() + "\t" +
+                            student.getId() + "\t" +
+                            student.getCode() + "\t" +
+                            student.getName() + "\t" +
+                            student.getBirthday() + "\t" +
+                            student.getEmail());
+                    bufferedWriter.newLine();
+                }
+
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /*
+     CRUD using file CSV
+     Create: Thêm học viên vào file CSV
+     Read: Đọc toàn bộ học viên từ file CSV
+     Update: Cập nhật thông tin học viên trong file CSV
+     Delete: Xóa học viên khỏi file CSV
+     */
+// chuyển dữ liệu file sang mảng list arr student
+    File file = new File("src/CGManagement/view/students_data.csv");
+    public List<Student> convertCSVtoLine( File file){
+        List<Student> list = new ArrayList<>();
+        try(
+                FileReader fileReader = new FileReader(file);
+                BufferedReader bufferedReader = new BufferedReader(fileReader)
+        ) {
+            bufferedReader.readLine();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] data = line.split(",");
+                Student student = new Student(Integer.parseInt(data[1]),
+                        data[2],
+                        data[3],
+                        LocalDate.parse(data[4]),
+                        data[5],
+                        data[0]);
+                list.add(student);
+            }
+        } catch ( IOException e){
+            System.err.println(e.getMessage());
+        }
+        return list;
+    }
+
+    public void addStudentToCSV() {
+        inputFromScreen();
+        try (
+                FileWriter fileWriter = new FileWriter("src/CGManagement/view/students_data.csv", true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)
+        ){
+            bufferedWriter.write(inputClassName + ","
+                    + "0" + ","
+                    + inputCode + ","
+                    + inputName + ","
+                    + LocalDate.parse(inputDOB) + ","
+                    + inputEmail);
+            bufferedWriter.newLine();
+            System.out.println("Thêm sinh viên thành công.");
+
+        } catch (IOException e){
+            System.err.println(e.getMessage());
         }
     }
 }

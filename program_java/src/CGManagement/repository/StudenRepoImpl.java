@@ -10,7 +10,8 @@ public class StudenRepoImpl implements IStudentRepo {
     private final static List<Student> students;
     static {
         students = new ArrayList<>();
-        students.add(new Student(1, "HV1", "Việt", LocalDate.parse("2000-09-09"), "viet@gmail.com", "C0324"));
+        students.add(new Student(1, "HV1", "việt", LocalDate.parse("2000-09-09"), "viet@gmail.com", "C0324"));
+        students.add(new Student(2, "HV2", "nam", LocalDate.parse("2000-09-09"), "nam@gmail.com", "C0324"));
 
     }
 
@@ -59,5 +60,16 @@ public class StudenRepoImpl implements IStudentRepo {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<Student> getStudentsByName(String name) {
+        List<Student> studentList = new ArrayList<>();
+        for(Student student : studentList){
+            if (student.getName().contains(name)){
+                studentList.add(student);
+            }
+        }
+        return studentList ;
     }
 }

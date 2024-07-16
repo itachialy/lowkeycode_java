@@ -36,4 +36,9 @@ public class StudentServiceImpl implements IStudentService{
     public boolean isExistingStudent(int id) {
         return iStudentRepo.isExistingStudent(id);
     }
+
+    @Override
+    public List<Student> getStudentsByName(String name) {
+        return iStudentRepo.getStudentsByName(name);
+    }
 }
