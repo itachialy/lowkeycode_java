@@ -65,7 +65,7 @@ public class StudenRepoImpl implements IStudentRepo {
     @Override
     public List<Student> getStudentsByName(String name) {
         List<Student> studentList = new ArrayList<>();
-        for(Student student : studentList){
+        for(Student student : students){
             if (student.getName().contains(name)){
                 studentList.add(student);
             }

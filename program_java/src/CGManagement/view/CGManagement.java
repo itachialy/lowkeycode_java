@@ -2,7 +2,6 @@ package CGManagement.view;
 
 import CGManagement.controller.StudentController;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class CGManagement {
@@ -29,7 +28,7 @@ public class CGManagement {
                     System.out.println("Chưa hoàn thành xong chức năng này.");
                     break;
                 case 3:
-                    System.exit(0);
+                    System.exit(1);
                 default:
                     System.out.println("Vui lòng nhập đúng lựa chọn.");
             }
@@ -70,6 +69,7 @@ public class CGManagement {
                     break;
                 case 5:
                     studentController.getStudentByName();
+                    break;
                 case 6:
                     studentController.exportToCSV();
                     break;
@@ -77,6 +77,7 @@ public class CGManagement {
                     studentController.addStudentToCSV();
                     break;
                 case 8:
+                    studentController.displayAllStudentsCSV();
                     break;
                 case 9:
                     break;

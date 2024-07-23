@@ -179,4 +179,24 @@ public class StudentController {
             System.err.println(e.getMessage());
         }
     }
+    public void displayAllStudentsCSV(){
+        try (
+                FileReader fileReader = new FileReader("src/CGManagement/view/students_data.csv");
+                BufferedReader bufferedReader = new BufferedReader(fileReader)
+        ){
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] data = line.split(",");
+                System.out.println("Student {" +
+                        "id=" + data[1] +
+                        ", code =" + data[2] +
+                        ", name =" + data[3] +
+                        ", email =" + data[4] +
+                        ", ClassName =" + data[0]);
+            }
+
+        } catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+    }
 }
